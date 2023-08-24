@@ -25,3 +25,5 @@ for carpeta, subcarpeta, archivo in os.walk(ruta):
     for arch in archivo:
         print(f'\t{arch}')
     print('\n')
+
+
