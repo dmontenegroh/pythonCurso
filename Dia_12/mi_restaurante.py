@@ -1,6 +1,13 @@
 from tkinter import *
+import random
+import datetime
+from tkinter import filedialog, messagebox
+
 
 operador = ''
+precios_comida = [1.32, 1.65, 2.31, 3.22, 1.22, 1.99, 2.05, 2.65]
+precios_bebida = [0.25, 0.99, 1.21, 1.54, 1.08, 1.10, 2.00, 1.58]
+precios_postres = [1.54, 1.68, 1.32, 1.97, 2.55, 2.14, 1.94, 1.74]
 
 
 def click_boton(numero):
@@ -26,7 +33,162 @@ def obtener_resultado():
 
 
 def revisar_check():
-    pass
+    x = 0
+    for c in cuadros_comida:
+        if variables_comida[x].get() == 1:
+            cuadros_comida[x].config(state=NORMAL)
+            if cuadros_comida[x].get() == '0':
+                cuadros_comida[x].delete(0, END)
+            cuadros_comida[x].focus()
+        else:
+            cuadros_comida[x].config(state=DISABLED)
+            textos_comida[x].set('0')
+        x += 1
+
+    y = 0
+    for c in cuadros_bebida:
+        if variables_bebida[y].get() == 1:
+            cuadros_bebida[y].config(state=NORMAL)
+            if cuadros_bebida[y].get() == '0':
+                cuadros_bebida[y].delete(0, END)
+            cuadros_bebida[y].focus()
+        else:
+            cuadros_bebida[y].config(state=DISABLED)
+            textos_bebida[y].set('0')
+        y += 1
+
+    z = 0
+    for c in cuadros_postre:
+        if variables_postre[z].get() == 1:
+            cuadros_postre[z].config(state=NORMAL)
+            if cuadros_postre[z].get() == '0':
+                cuadros_postre[z].delete(0, END)
+            cuadros_postre[z].focus()
+        else:
+            cuadros_postre[z].config(state=DISABLED)
+            textos_postre[z].set('0')
+        z += 1
+
+
+def total():
+    sub_total_comida = 0
+    p = 0
+    for cantidad in textos_comida:
+        sub_total_comida = sub_total_comida + \
+            (float(cantidad.get()) * precios_comida[p])
+        p += 1
+
+    sub_total_bebida = 0
+    p1 = 0
+    for cantidad in textos_bebida:
+        sub_total_bebida = sub_total_bebida + \
+            (float(cantidad.get()) * precios_bebida[p1])
+        p1 += 1
+
+    sub_total_postre = 0
+    p2 = 0
+    for cantidad in textos_postre:
+        sub_total_postre = sub_total_postre + \
+            (float(cantidad.get()) * precios_postres[p2])
+        p2 += 1
+
+    sub_total = sub_total_comida + sub_total_bebida + sub_total_postre
+    impuestos = sub_total * 0.07
+    total = sub_total + impuestos
+
+    var_costo_comida.set(f'$ {round(sub_total_comida, 2)}')
+    var_costo_bebida.set(f'$ {round(sub_total_bebida, 2)}')
+    var_costo_postre.set(f'$ {round(sub_total_postre, 2)}')
+    var_subtotal.set(f'$ {round(sub_total, 2)}')
+    var_impuesto.set(f'$ {round(impuestos, 2)}')
+    var_total.set(f'$ {round(total, 2)}')
+
+
+num_recibo = 0
+
+
+def recibo():
+    global num_recibo
+    texto_recibo.delete(1.0, END)
+    num_recibo = f'N# - {random.randint(1000, 9999)}'
+    fecha = datetime.datetime.now()
+    fecha_recibo = fecha.strftime('%d/%m/%Y - %H:%M:%S')
+    texto_recibo.insert(END, f'Datos: \t\t{num_recibo}\t\t{fecha_recibo}\n')
+    texto_recibo.insert(END, f'*' * 75 + '\n')
+    texto_recibo.insert(END, 'Items\t\tCant.\tCosto Item\n')
+    texto_recibo.insert(END, f'-' * 90 + '\n')
+
+    x = 0
+    for comida in textos_comida:
+        if comida.get() != '0':
+            texto_recibo.insert(
+                END, f'{lista_comidas[x]}\t\t{comida.get()}\t$ {int(comida.get()) * precios_comida[x]}\n')
+
+        x += 1
+
+    y = 0
+    for bebida in textos_bebida:
+        if bebida.get() != '0':
+            texto_recibo.insert(
+                END, f'{lista_bebidas[y]}\t\t{bebida.get()}\t$ {int(bebida.get()) * precios_bebida[y]}\n')
+
+        y += 1
+
+    z = 0
+    for postre in textos_postre:
+        if postre.get() != '0':
+            texto_recibo.insert(
+                END, f'{lista_postres[z]}\t\t{postre.get()}\t$ {int(postre.get()) * precios_postres[z]}\n')
+
+        z += 1
+
+    texto_recibo.insert(END, f'-' * 90 + '\n')
+    texto_recibo.insert(
+        END, f' Costo de la Comida: \t\t\t{var_costo_comida.get()}\n')
+    texto_recibo.insert(
+        END, f' Costo de la Bebida: \t\t\t{var_costo_bebida.get()}\n')
+    texto_recibo.insert(
+        END, f' Costo de los Postres: \t\t\t{var_costo_postre.get()}\n')
+    texto_recibo.insert(END, f'-' * 90 + '\n')
+    texto_recibo.insert(END, f' Sub-total: \t\t\t{var_subtotal.get()}\n')
+    texto_recibo.insert(END, f' Impuestos: \t\t\t{var_impuesto.get()}\n')
+    texto_recibo.insert(END, f' Total: \t\t\t{var_total.get()}\n')
+    texto_recibo.insert(END, f'*' * 75 + '\n')
+    texto_recibo.insert(END, 'Lo esperamos pronto')
+
+
+def guardar():
+    info_recibo = texto_recibo.get(1.0, END)
+    archivo = filedialog.asksaveasfile(
+        mode="w", defaultextension=".txt", initialfile=num_recibo)
+    archivo.write(info_recibo)
+    archivo.close()
+    messagebox.showinfo("Información", "Su recibo ha sido guardado")
+
+
+def resetear():
+    texto_recibo.delete(0.1, END)
+
+    for texto in textos_comida:
+        texto.set('0')
+    for texto in textos_bebida:
+        texto.set('0')
+    for texto in textos_postre:
+        texto.set('0')
+
+    for cuadro in cuadros_comida:
+        cuadro.config(state=DISABLED)
+    for cuadro in cuadros_bebida:
+        cuadro.config(state=DISABLED)
+    for cuadro in cuadros_postre:
+        cuadro.config(state=DISABLED)
+
+    for v in variables_comida:
+        v.set(0)
+    for v in variables_bebida:
+        v.set(0)
+    for v in variables_postre:
+        v.set(0)
 
 
 # iniciar tkinter
@@ -282,6 +444,7 @@ texto_total.grid(row=2, column=3, padx=41)
 
 # botones
 botones = ['total', 'recibo', 'guardar', 'resetear']
+botones_creados = []
 columnas = 0
 for boton in botones:
     boton = Button(panel_botones,
@@ -292,9 +455,15 @@ for boton in botones:
                    bd=1,
                    width=9)
 
+    botones_creados.append(boton)
+
     boton.grid(row=0, column=columnas)
     columnas += 1
 
+botones_creados[0].config(command=total)
+botones_creados[1].config(command=recibo)
+botones_creados[2].config(command=guardar)
+botones_creados[3].config(command=resetear)
 
 # area de recibo
 texto_recibo = Text(panel_recibo,
