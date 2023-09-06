@@ -67,9 +67,6 @@ def trasformar_audio_en_texto():
 # informar que hora es
 
 
-
-
-
 def hablar(mensaje):
 
     # encender el motor de pyttsx3
@@ -113,6 +110,7 @@ def pedir_dia():
 id1 = 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_EN-US_ZIRA_11.0'
 id2 = 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_ES-ES_HELENA_11.0'
 
+
 def pedir_hora():
 
     # crear una variable con datos de la hora
@@ -123,4 +121,20 @@ def pedir_hora():
     hablar(hora)
 
 
-pedir_hora()
+def saludo_inicial():
+
+    # crear variable con datos de hora
+    hora = datetime.datetime.now()
+    if hora.hour < 6 or hora.hour > 20:
+        momento = 'Buenas noches'
+    elif hora.hour >= 6 and hora.hour < 13:
+        momento = 'Buen dia'
+    else:
+        momento = 'Buenas tardes'
+
+    # decir el saludo
+    hablar(
+        f'{momento}, soy Zira, tu asistente personal, Por favor, dime en que te puedo ayudar')
+
+
+saludo_inicial()
