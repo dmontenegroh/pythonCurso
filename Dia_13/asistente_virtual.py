@@ -61,3 +61,66 @@ def trasformar_audio_en_texto():
 
             # devolver error
             return "sigo esperando"
+
+# funcion para que el asistente pueda ser escuchado
+
+# informar que hora es
+
+
+
+
+
+def hablar(mensaje):
+
+    # encender el motor de pyttsx3
+    engine = pyttsx3.init()
+    engine.setProperty('voice', id1)
+
+    # pronunciar mensaje
+    engine.say(mensaje)
+    engine.runAndWait()
+
+
+# cambiar idioma
+# engine = pyttsx3.init()
+# for voz in engine.getProperty('voices'):
+#     print(voz)
+
+def pedir_dia():
+
+    # crear la variable con datos de hoy
+    dia = datetime.date.today()
+    print(dia)
+
+    # crear variable para el dia de semana
+    dia_semana = dia.weekday()
+    print(dia_semana)
+
+    # diccionario con nombre de dias
+    calendario = {0: 'Lunes',
+                  1: 'Martes',
+                  2: 'Miercoles',
+                  3: 'Jueves',
+                  4: 'Viernes',
+                  5: 'Sabado',
+                  6: 'Domingo'}
+
+    # decir el dia de la semana
+    hablar(f'Hoy es {calendario[dia_semana]}')
+
+
+# hablar("Hola mundo")
+id1 = 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_EN-US_ZIRA_11.0'
+id2 = 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_ES-ES_HELENA_11.0'
+
+def pedir_hora():
+
+    # crear una variable con datos de la hora
+    hora = datetime.datetime.now()
+    hora = f'En este momento son las {hora.hour} horas con {hora.minute} minutos y {hora.second} segundos'
+
+    # decir la hora
+    hablar(hora)
+
+
+pedir_hora()
