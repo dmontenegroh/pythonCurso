@@ -217,15 +217,5 @@ def pedir_cosas():
 # pedir_cosas()
 
 
-# 1 https://open.spotify.com/intl-es/track/6vXceKic4ACImU0bC3oecd?si=bf2a6de5889b450c
-# 2 https://open.spotify.com/intl-es/track/7wdwIaXUuzlu1grzWMFRJm?si=cc0ca43bb34246c5
-# 3 https://open.spotify.com/intl-es/track/0PSWSiRXsxsLAEdEhaJAId?si=cd9ca1adbabc4893
-# 4 https://open.spotify.com/intl-es/track/1BLfQ6dPXmuDrFmbdfW7Jl?si=8e29579a11434e5d
-# 5 https://open.spotify.com/intl-es/track/7pS3O75hJnthHr64tlpqPn?si=e33a78fc38bb4661
-# 6 https://open.spotify.com/intl-es/track/0bog7rv4F6iffTSWcYQHeq?si=66e17ecf8a57437d
-# 7 https://open.spotify.com/intl-es/track/38UYeBLfvpnDSG9GznZdnL?si=576859e1c979456c
-# 8 https://open.spotify.com/intl-es/track/0ZGWe02EtMpw40QAzOVZD1?si=70f48b57d930421b
-# 9 https://open.spotify.com/intl-es/track/3RQHAFkEHiFHQ7qmMpKRdv?si=4080513da65f4946
-# 10 https://open.spotify.com/intl-es/track/3fjmSxt0PskST13CSdBUFx?si=215f4559740b4459
-# 11 https://open.spotify.com/intl-es/track/1r8qywTSOGQvFxQnzcyiBj?si=2ab8e7c50698425a
-# 12 https://open.spotify.com/intl-es/track/0w4ZwKHHEkXtvHMNUjFPdB?si=edad280c018a4b5d
+
+
