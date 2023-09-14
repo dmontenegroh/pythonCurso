@@ -136,8 +136,7 @@ def saludo_inicial():
         momento = 'Buenas tardes'
 
     # decir el saludo
-    hablar(
-        f'{momento}, soy Zira, tu asistente personal, Por favor, dime en que te puedo ayudar')
+    hablar(f'{momento}, soy Zira, tu asistente personal, Por favor, dime en que te puedo ayudar')
 
 
 # saludo_inicial()
